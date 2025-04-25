@@ -1,10 +1,55 @@
-<!DOCTYPE html>
-<html lang="en">
+<!doctype html>
+<html lang="ru">
 <head>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400&display=swap" rel="stylesheet">
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Регистрация — Сервис лекарств</title>
+    <link rel="stylesheet" href="/assets/css/styles.css">
 </head>
 <body>
-<h1>Авторизация</h1>
+<header class="header">
+    <div class="header-inner">
+        <a href="/index.html">
+            <img src="assets/pictures/pill_header_img.png" alt="Логотип" class="logo">
+        </a>
+        <a href="/index.html">
+            <div class="header-text">
+                <p>Сервис для проверки совместимости лекарственных препаратов<br>
+                    и определения безопасных сочетаний лекарств</p>
+            </div>
+        </a>
+    </div>
+</header>
+
+
+<main class="main-content">
+    <div class="form-container">
+        <div class="registration">
+            <h1 class="form-title">Авторизация</h1>
+        </div>
+
+        <div class="input-group">
+            <img src="assets/pictures/email_icon.png" class="input-icon" alt="E-mail">
+            <input id="email" type="email" required placeholder=" "/>
+            <label for="email">E-mail</label>
+        </div>
+
+        <div class="input-group">
+            <img src="assets/pictures/password_icon.png" class="input-icon" alt="Пароль">
+            <input id="password" type="password" required placeholder=" "/>
+            <label for="password">Пароль</label>
+        </div>
+
+        <div>
+            <button type="submit">Войти</button>
+        </div>
+
+        <div class="or-link">
+            <h2>Еще не зарегистрированы?<br><a href="register.html">Зарегистрироваться</a><br/></h2>
+        </div>
+
+    </div>
+</main>
+<script type="module" src="/login.js"></script>
 </body>
 </html>
