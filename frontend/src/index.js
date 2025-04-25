@@ -1,10 +1,6 @@
 import '@/assets/css/styles.css';
+import { initRouter } from '@/js/router.js'; // alias @ → src
 
-
-// Импорт главного скрипта
-import { initRouter } from '/assets/js/router.js';
-
-// Запуск приложения
 document.addEventListener('DOMContentLoaded', () => {
-    initRouter(); // Инициализация роутера
+    initRouter();
 });

@@ -9,7 +9,7 @@ export default defineConfig({
     },
     root: path.resolve(__dirname, 'src'),  // Корень — папка src/
     server: {
-        open: '/pages/index.html',           // Автооткрываемая страница
+        open: '/index.html',           // Автооткрываемая страница
     },
     build: {
         outDir: '../dist',                  // Папка для сборки

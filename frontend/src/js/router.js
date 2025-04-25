@@ -1,9 +1,9 @@
 // Определяем маршруты
 const routes = {
-    '/': '/pages/home.html',
-    '/login': '/pages/login.html',
-    '/register': '/pages/register.html',
-    '/profile': '/pages/profile.html'
+    '/': '/index.html',
+    '/login': '/login.html',
+    '/register': '/register.html',
+    '/profile': '/profile.html'
 };
 
 // Функция загрузки контента
