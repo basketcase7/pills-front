@@ -23,38 +23,48 @@
 
 
 <main class="main-content">
-    <form   id="loginForm">
-        <div class="form-container">
-            <div class="registration">
-                <h1 class="form-title">Авторизация</h1>
+    <div class="form-container">
+        <div class="registration">
+            <h1 class="form-title">Регистрация</h1>
+        </div>
+
+        <form id="registerForm">
+            <div class="input-group">
+                <img src="assets/pictures/first_or_last_name_icon.png" class="input-icon" alt="Имя">
+                <input id="firstName" name="firstName" type="text" required placeholder=" "/>
+                <label for="firstName">Имя</label>
+            </div>
+
+            <div class="input-group">
+                <img src="assets/pictures/first_or_last_name_icon.png" class="input-icon" alt="Фамилия">
+                <input id="lastName" name="lastName" type="text" required placeholder=" "/>
+                <label for="lastName">Фамилия</label>
             </div>
 
             <div class="input-group">
                 <img src="assets/pictures/email_icon.png" class="input-icon" alt="E-mail">
-                <input id="email" type="email" required placeholder=" "/>
+                <input id="email" name="email" type="email" required placeholder=" "/>
                 <label for="email">E-mail</label>
             </div>
 
             <div class="input-group">
                 <img src="assets/pictures/password_icon.png" class="input-icon" alt="Пароль">
-                <input id="password" type="password" required placeholder=" "/>
+                <input id="password" name="password" type="password" required placeholder=" "/>
                 <label for="password">Пароль</label>
             </div>
 
             <div>
-                <button type="submit">Войти</button>
+                <button type="submit">Зарегистрироваться</button>
             </div>
-            <div id="result"></div>
-        </div>
-    </form>
-
-    <div>
+        </form>
+        <div id="result"></div> <!-- для вывода ошибок -->
         <p class="or-link">
-            Ещё не зарегистрированы? <a href="register.html">Зарегистрироваться</a>
+            Уже зарегистрированы? <a href="login.html">Войти</a>
         </p>
     </div>
 </main>
 
-<script type="module" src="js/login.js"></script>
+
+<script type="module" src="js/register.js"></script>
 </body>
 </html>

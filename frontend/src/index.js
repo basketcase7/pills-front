@@ -1,5 +1,11 @@
-import { login } from './api/auth.js';
+// index.js
+document.addEventListener('DOMContentLoaded', () => {
+    const token = localStorage.getItem('token');
 
-login('user@example.com', 'P@ssw0rd!')
-    .then(data => console.log('Успешный вход:', data))
-    .catch(err => console.error('Ошибка входа:', err));
+    if (token) {
+        console.log('Пользователь авторизован. Токен:', token);
+        // Здесь можно, например, отрисовать информацию о пользователе
+    } else {
+        console.log('Пользователь не авторизован');
+    }
+});

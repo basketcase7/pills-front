@@ -9,9 +9,15 @@ export default defineConfig({
     },
     root: path.resolve(__dirname, 'src'),  // Корень — папка src/
     server: {
-        open: '/index.html',           // Автооткрываемая страница
+        open: '/index.html',
+        proxy: {
+            '/auth': {
+                target: '192.168.0.106:8080',
+                changeOrigin: true,
+            },
+        },
     },
     build: {
-        outDir: '../dist',                  // Папка для сборки
-    },
+        outDir: '../dist',  // Папка для сборки
+    }
 });
