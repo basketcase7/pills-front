@@ -1,4 +1,4 @@
-import { login } from "@/js/auth.js";
+import { login } from "@/public/pages/js/auth.js";
 
 document.getElementById('loginForm').addEventListener('submit', async (e) => {
     e.preventDefault();

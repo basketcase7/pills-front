@@ -1,4 +1,4 @@
-import { request } from './http';
+import { request } from './http.js';
 
 export function getSessionsByStatus(active, token) {
     return request(`/auth/sessions/isactive/${active}`, {

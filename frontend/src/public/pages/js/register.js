@@ -1,4 +1,4 @@
-import { register } from "@/js/auth.js";
+import { register } from "@/public/pages/js/auth.js";
 
 const form = document.getElementById('registerForm');
 const result = document.getElementById('result');

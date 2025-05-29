@@ -4,15 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400&display=swap" rel="stylesheet">
-    <title>Каталог — Сервис лекарств</title>
-    <link rel="stylesheet" href="../public/assets/css/main_page.css">
+    <title>Мои таблетки</title>
+    <link rel="stylesheet" href="/assets/css/main_page.css">
 </head>
 <body>
-
 <header class="header">
     <div class="first_p_header">
         <a href="/index.html">
-            <img src="../public/assets/pictures/pill_header_img.png" alt="Логотип" class="logo">
+            <img src="/assets/pictures/pill_header_img.png" alt="Логотип" class="logo">
         </a>
         <a href="/index.html">
             <div class="main-text">
@@ -21,26 +20,27 @@
             </div>
         </a>
     </div>
-
     <div class="second_p_header">
         <div class="header_logo">
-            <a href="/pages/profile.html">
-                <img src="./public/assets/pictures/sign_up_icon.png" class="ant_logo">
+            <a href="/pages/register.html">
+                <img src="/assets/pictures/sign_up_icon.png" class="ant_logo">
                 <p class="header_text">Мой профиль</p>
             </a>
         </div>
+        <div class="header_logo">
+            <a href="/pages/user_list.html">
+                <img src="/assets/pictures/list_icon.png" class="ant_logo">
+                <p class="header_text">Мои таблетки</p>
+            </a>
+        </div>
     </div>
-
 </header>
 
 <main class="main">
-    <div class="card-grid" id="pill-container"></div>
-    <div class="pagination" id="pagination">
-        <button id="prev-page" disabled>Предыдущая</button>
-        <div id="page-numbers"></div>
-        <button id="next-page">Следующая</button>
+    <div class="user-list-container">
+        <!-- Список добавленных препаратов будет отображаться здесь -->
     </div>
 </main>
-<script type="module" src="index.js"></script>
+<script type="module" src="./js/pill_counter.js"></script>
 </body>
 </html>
