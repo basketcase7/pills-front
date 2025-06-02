@@ -1,5 +1,5 @@
 import { request } from './http.js';
-const API_URL = 'http://192.168.0.106:8080';// Тестовый адрес
+import { API_URL } from './http.js'
 
 export async function login(email, password) {
     try {

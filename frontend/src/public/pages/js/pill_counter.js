@@ -9,17 +9,6 @@ document.addEventListener("DOMContentLoaded", () => {
         // Получаем счетчики из localStorage
         const counters = JSON.parse(localStorage.getItem('pillCounters')) || [];
 
-        // Тестовые данные (замените на данные из бэкенда)
-        const data = [
-            { name: 'Парацетамол', imageUrl: 'https://via.placeholder.com/150' },
-            { name: 'Ибупрофен', imageUrl: 'https://via.placeholder.com/150' },
-            { name: 'Аспирин', imageUrl: 'https://via.placeholder.com/150' },
-            { name: 'Нурофен', imageUrl: 'https://via.placeholder.com/150' },
-            { name: 'Цитрамон', imageUrl: 'https://via.placeholder.com/150' },
-            { name: 'Анальгин', imageUrl: 'https://via.placeholder.com/150' },
-            { name: 'Кеторол', imageUrl: 'https://via.placeholder.com/150' },
-            { name: 'Диклофенак', imageUrl: 'https://via.placeholder.com/150' }
-        ];
 
         // Пример запроса к бэкенду
         /*

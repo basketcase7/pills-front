@@ -7,7 +7,7 @@ if (!token) {
 
 async function loadProfile() {
     try {
-        const response = await fetch('http://192.168.0.106:8080/auth/profile', {
+        const response = await fetch('http://192.168.0.107:8080/auth/profile', {
             method: 'GET',
             headers: {
                 'Authorization': `Bearer ${token}`
@@ -34,7 +34,7 @@ function setupLogoutButton() {
         console.log('Начало обработки выхода');
 
         try {
-            const response = await fetch('http://192.168.0.106:8080/auth/sessions/logout', { // Убедитесь в правильности URL
+            const response = await fetch('http://192.168.0.107:8080/auth/sessions/logout', { // Убедитесь в правильности URL
                 method: 'POST', // Обычно для выхода используется POST
                 headers: {
                     'Authorization': `Bearer ${token}`,

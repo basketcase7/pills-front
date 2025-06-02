@@ -138,7 +138,7 @@ a, a:visited, a:hover, a:active {
     text-align: center;
 }
 
-.add-button {
+.add-pill-button-container {
     margin-top: 10px;
     padding: 12px 40px 12px 40px;
     background-color: #BEF3FF;
@@ -150,7 +150,7 @@ a, a:visited, a:hover, a:active {
     transition: background-color 0.3s;
 }
 
-.add-button:hover {
+.add-pill-button-container:hover {
     background-color: #D7F7FF;
 }
 

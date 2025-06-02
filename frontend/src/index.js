@@ -1,146 +1,137 @@
-document.addEventListener("DOMContentLoaded", async () => {
-    try {
-        // Тестовые данные (замените на запрос к бэкенду)
-        const data = [
-            { name: 'Парацетамол', imageUrl: 'https://via.placeholder.com/150' },
-            { name: 'Ибупрофен', imageUrl: 'https://via.placeholder.com/150' },
-            { name: 'Аспирин', imageUrl: 'https://via.placeholder.com/150' },
-            { name: 'Нурофен', imageUrl: 'https://via.placeholder.com/150' },
-            { name: 'Цитрамон', imageUrl: 'https://via.placeholder.com/150' },
-            { name: 'Анальгин', imageUrl: 'https://via.placeholder.com/150' },
-            { name: 'Кеторол', imageUrl: 'https://via.placeholder.com/150' },
-            { name: 'Диклофенак', imageUrl: 'https://via.placeholder.com/150' }
-        ];
+// Скрипт для загрузки и отображения страниц с таблетками, с пагинацией и заглушкой для изображений
 
-        // Пример запроса к бэкенду (раскомментируйте, когда подключите API)
-        /*
-        const response = await fetch('/api/pills');
-        const data = await response.json();
-        method: 'GET',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-        });
-        */
+document.addEventListener("DOMContentLoaded", () => {
+    const container = document.getElementById('pill-container');
+    const pageNumbers = document.getElementById('page-numbers');
+    const prevBtn = document.getElementById('prev-page');
+    const nextBtn = document.getElementById('next-page');
+    const authSection = document.getElementById('auth-section');
 
-        const container = document.getElementById('pill-container');
-        if (!container) {
-            console.error('Контейнер pill-container не найден');
-            return;
-        }
+    let currentPage = 1;
+    let totalPages = 0;
+    const token = localStorage.getItem('token');
+    const baseUrl = 'http://192.168.0.107:8081/api/pills';
+    const placeholder = '/public/assets/pictures/placeholder.png';
 
-        // Заполняем карточки данными
-        data.forEach((pill, index) => {
-            const card = document.createElement('div');
-            card.className = 'pill-card';
-            card.innerHTML = `
-                <div class="pill-image">
-                    <img src="${pill.imageUrl}" alt="${pill.name}" />
-                </div>
-                <div class="pill-name">${pill.name}</div>
-                <button class="add-button" data-index="${index}">Добавить в список</button>
-            `;
-            container.appendChild(card);
-        });
-
-        // Инициализируем счетчики (по умолчанию 0)
-        const counters = JSON.parse(localStorage.getItem('pillCounters')) || Array(data.length).fill(0);
-
-        // Обновляем счетчики для уже существующих кнопок
-        const buttons = document.querySelectorAll('.add-button');
-        console.log('Найдено кнопок:', buttons.length); // Должно быть 8
-        buttons.forEach((button, index) => {
-            button.addEventListener('click', () => {
-                counters[index]++;
-                localStorage.setItem('pillCounters', JSON.stringify(counters));
-                console.log(`Товар "${data[index].name}" добавлен, счетчик: ${counters[index]}`);
-                // Здесь запрос к бэкенду для сохранения
-                // fetch('/api/addPill', { method: 'POST', body: JSON.stringify({ name: data[index].name, count: counters[index] }) });
-            });
-        });
-
-    } catch (error) {
-        console.error('Ошибка загрузки данных:', error);
+    // 1) Проверка авторизации и отрисовка секции
+    if (authSection) {
+        authSection.innerHTML = token
+            ? `<a href="/pages/profile.html">
+         <img src="./public/assets/pictures/sign_up_icon.png" class="ant_logo">
+         <p class="header_text">Мой профиль</p>
+       </a>`
+            : `<a href="/pages/login.html">
+         <img src="./public/assets/pictures/sign_up_icon.png" class="ant_logo">
+         <p class="header_text">Войти</p>
+       </a>`;
     }
 
-    let currentPage = 0;
-    let totalPages = 0;
+    // 1.5) Добавление кнопки "Добавить таблетку"
+    const addBtnContainer = document.getElementById('add-pill-button-container');
+    if (addBtnContainer) {
+        const addBtn = document.createElement('button');
+        addBtn.textContent = 'Добавить таблетку';
+        addBtn.className = 'add-pill-button'; // для стилизации
+        addBtn.addEventListener('click', () => {
+            window.location.href = '/pages/pill_card.html'; // укажи нужную страницу
+        });
+        addBtnContainer.appendChild(addBtn);
+    }
 
-    document.addEventListener('DOMContentLoaded', () => {
-        loadProfile();
-        setupLogoutButton();
-        loadPageCount();
-    });
+    // 2) Загрузка количества страниц и первой страницы
+    loadPageCount();
 
     async function loadPageCount() {
         try {
-            const response = await fetch(`http://192.168.0.106:8080/api/pills/pageCount`, {
-                headers: {
-                    'Authorization': `Bearer ${token}`
-                }
+            const resp = await fetch(`${baseUrl}/pageCount`, {
+                headers: token ? {'Authorization': `Bearer ${token}`} : {}
             });
-
-            totalPages = await response.json();
+            totalPages = await resp.json();
             renderPagination();
-            loadPage(currentPage);
+            loadPage(1);
         } catch (e) {
             console.error('Ошибка загрузки количества страниц:', e);
         }
     }
 
-    async function loadPage(pageNumber) {
+    // 3) Загрузка конкретной страницы
+    async function loadPage(page) {
         try {
-            const response = await fetch(`http://192.168.0.106:8080/api/pills/${pageNumber}`, {
-                headers: {
-                    'Authorization': `Bearer ${token}`
-                }
+            const resp = await fetch(`${baseUrl}/${page}`, {
+                headers: token ? { 'Authorization': `Bearer ${token}` } : {}
             });
-
-            const pills = await response.json();
+            const pills = await resp.json();
             displayPills(pills);
-            currentPage = pageNumber;
+            currentPage = page;
             updatePaginationButtons();
+            renderPagination(); // добавь это, чтобы обновить состояние кнопок
         } catch (e) {
             console.error('Ошибка загрузки страницы:', e);
         }
     }
 
+
+    // 4) Функция отображения карточек таблеток
     function displayPills(pills) {
-        const container = document.getElementById('pill-container');
         container.innerHTML = '';
         pills.forEach(pill => {
-            const div = document.createElement('div');
-            div.className = 'pill-card'; // добавь стиль в CSS, если хочешь
-            div.textContent = `${pill.name} — ${pill.description}`;
-            container.appendChild(div);
+            const imgSrc = placeholder;
+
+            const card = document.createElement('div');
+            card.className = 'pill-card';
+            card.innerHTML = `
+            <div class="pill-image">
+                <img src="${imgSrc}" alt="Заглушка">
+            </div>
+            <div class="pill-title">${pill.title}</div>
+        `;
+
+            card.addEventListener('click', () => {
+                // Сохраняем название в localStorage (опционально, если нужно для других целей)
+                localStorage.setItem('selectedPillTitle', pill.title);
+
+                // Переходим на страницу карточки с параметром title в URL
+                window.location.href = `/pages/pill_card.html?title=${encodeURIComponent(pill.title)}`;
+            });
+
+
+            container.appendChild(card);
         });
     }
 
-    function renderPagination() {
-        const pageNumbers = document.getElementById('page-numbers');
-        pageNumbers.innerHTML = '';
 
-        for (let i = 0; i < totalPages; i++) {
+    // 5) Пагинация
+    function renderPagination() {
+        pageNumbers.innerHTML = '';
+        for (let i = 1; i <= totalPages; i++) {
             const btn = document.createElement('button');
-            btn.textContent = i + 1;
+            btn.textContent = i;
+
+            // disable кнопку, если это текущая страница
             btn.disabled = (i === currentPage);
-            btn.addEventListener('click', () => loadPage(i));
+
+            btn.addEventListener('click', () => {
+                if (i !== currentPage) {
+                    loadPage(i); // загружаем страницу i
+                }
+            });
+
             pageNumbers.appendChild(btn);
         }
 
-        document.getElementById('prev-page').addEventListener('click', () => {
-            if (currentPage > 0) loadPage(currentPage - 1);
+        prevBtn.addEventListener('click', () => {
+            if (currentPage > 1) loadPage(currentPage - 1);
         });
 
-        document.getElementById('next-page').addEventListener('click', () => {
-            if (currentPage < totalPages - 1) loadPage(currentPage + 1);
+        nextBtn.addEventListener('click', () => {
+            if (currentPage < totalPages) loadPage(currentPage + 1);
         });
     }
+
+
 
     function updatePaginationButtons() {
-        document.getElementById('prev-page').disabled = (currentPage === 0);
-        document.getElementById('next-page').disabled = (currentPage === totalPages - 1);
-        renderPagination();
+        prevBtn.disabled = (currentPage === 1);
+        nextBtn.disabled = (currentPage === totalPages);
     }
-
 });

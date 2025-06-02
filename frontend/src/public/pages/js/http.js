@@ -1,5 +1,4 @@
-const API_URL = 'http://192.168.0.106:8080'; // или адрес твоего бэка
-
+export const API_URL = 'https://98983ac6-5c2f-4621-ad61-ffefc1a506df.mock.pstmn.io'; // или адрес твоего бэка
 export async function request(url, options = {}) {
     const fullUrl = `${API_URL}${url}`;
 
@@ -12,10 +11,8 @@ export async function request(url, options = {}) {
         },
         ...options,
     });
-
     if (!response.ok) {
         throw new Error(`Ошибка: ${response.status}`);
     }
-
     return response.json();
 }

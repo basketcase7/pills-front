@@ -127,3 +127,15 @@ main {
     text-decoration: none;
     color: inherit;
 }
+
+button {
+    margin-top: 10px;
+    padding: 12px 40px 12px 40px;
+    background-color: #BEF3FF;
+    border: none;
+    border-radius: 6px;
+    font-size: 16px;
+    cursor: pointer;
+    color: #111;
+    transition: background-color 0.3s;
+}

@@ -1,72 +1,175 @@
-body {
-    font-family: Arial, sans-serif;
+* {
     margin: 0;
     padding: 0;
-    background-color: #e6f3ff;
+    font-family: 'Roboto', Tahoma, Geneva, Verdana, sans-serif;
 }
 
-header {
+body {
+    margin: 0;
+    min-height: 100vh;
     display: flex;
-    justify-content: space-between;
+    flex-direction: column;
+    background-color: #F4FDFF;
+    font-family: sans-serif;
+}
+/*норм*/
+.header {
+    display: flex;
+    justify-content: center; /* Центрирует всё содержимое */
+    background-color: #AAE1EE;
+
+}
+/*убрала*/
+.header-inner {
+    display: flex;
     align-items: center;
-    background-color: #4da8da;
-    padding: 10px 20px;
-    color: white;
+    gap: 10px;
 }
 
-.logo img {
-    vertical-align: middle;
-    margin-right: 10px;
-}
-
-.account img {
-    vertical-align: middle;
-    margin-right: 5px;
-}
-
-main {
-    padding: 20px;
-}
-
-.container {
+.first_p_header {
     display: flex;
-    background-color: #cceeff;
+    align-items: center;
+    gap: 10px;
     padding: 20px;
-    border-radius: 10px;
+}
+.second_p_header {
+    display: flex;
+    align-items: flex-end;
+    padding-left: 30px;
+    flex-wrap: nowrap;
 }
 
-.left-panel {
-    flex: 1;
+.header_logo {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.header_logo a {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.header_text {
+    font-weight: 300;
+    font-size: 10px;
     text-align: center;
+    text-decoration: underline;
+    padding-bottom: 15px;
+}
+/*????????????????????????*/
+.main-text {
+    font-size: 20px;
+    font-weight: 300;
 }
 
-.left-panel img {
+a {
+    text-decoration: none;
+}
+
+a, a:visited, a:hover, a:active {
+    color: inherit;
+}
+
+
+.logo {
+    width: 80px;
+    height: auto;
+    border-radius: 50%;
+}
+
+.ant_logo {
+    width: 58px;
+    height: auto;
+    border-radius: 50%;
+    align-items: center;
+}
+/*_____________________________________*/
+.pill-photo-placeholder {
+    width: 200px;
+    height: 200px;
+    background-color: #e0f7fa;
+    border: 2px dashed #90a4ae;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
     margin-bottom: 20px;
+    border-radius: 8px;
 }
 
-.left-panel button {
+.pill-photo-placeholder img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+}
+
+.placeholder-text {
+    color: #90a4ae;
+    font-size: 14px;
+    font-style: italic;
+}
+
+
+
+.card {
+    max-width: 900px;
+    margin: 40px auto;
+    display: flex;
+    gap: 20px;
+    background-color: #b3eaf7;
+    border-radius: 8px;
+    padding: 20px;
+}
+
+.card-left {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+}
+
+.pill-image {
+    width: 100%;
+    max-width: 300px;
+    border-radius: 6px;
+}
+
+.add-button {
     padding: 10px 20px;
-    background-color: #4da8da;
-    color: white;
+    background-color: #b7f0ff;
     border: none;
     border-radius: 5px;
     cursor: pointer;
+    font-weight: bold;
+    font-size: 16px;
 }
 
-.right-panel {
+.card-right {
     flex: 2;
-    padding-left: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
 }
 
-.info-section {
-    margin-bottom: 20px;
+.pill-name {
+    font-size: 24px;
+    font-weight: bold;
+    margin: 0;
 }
 
-h2 {
-    color: #333;
+.section h3 {
+    margin: 0 0 5px;
+    font-size: 18px;
+    background-color: white;
 }
 
-h3 {
-    color: #4da8da;
-    margin-top: 0;
+.text-block {
+    background-color: #d6f5fc;
+    padding: 10px;
+    border-radius: 4px;
+    font-size: 14px;
+    line-height: 1.4;
 }
