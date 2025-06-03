@@ -1,4 +1,4 @@
-import { login } from "@/public/pages/js/auth.js";
+import { login } from "./auth.js";
 
 document.getElementById('loginForm').addEventListener('submit', async (e) => {
     e.preventDefault();
@@ -41,7 +41,7 @@ document.getElementById('loginForm').addEventListener('submit', async (e) => {
         localStorage.setItem('token', response.token);
 
         // перенаправляем на главную страницу
-        window.location.href = '/home.html';
+        window.location.href = '/login.html';
     } catch (error) {
         console.error('Ошибка регистрации:', error);  // <-- добавили вывод в консоль
         result.textContent = `❌ Ошибка: ${error.message}`;

@@ -1,5 +1,4 @@
 // Скрипт для загрузки и отображения страниц с таблетками, с пагинацией и заглушкой для изображений
-
 document.addEventListener("DOMContentLoaded", () => {
     const container = document.getElementById('pill-container');
     const pageNumbers = document.getElementById('page-numbers');
@@ -10,7 +9,7 @@ document.addEventListener("DOMContentLoaded", () => {
     let currentPage = 1;
     let totalPages = 0;
     const token = localStorage.getItem('token');
-    const baseUrl = 'http://192.168.0.107:8081/api/pills';
+    const baseUrl = 'http://192.168.0.100:8081/api/pills';
     const placeholder = '/public/assets/pictures/placeholder.png';
 
     // 1) Проверка авторизации и отрисовка секции
@@ -24,18 +23,6 @@ document.addEventListener("DOMContentLoaded", () => {
          <img src="./public/assets/pictures/sign_up_icon.png" class="ant_logo">
          <p class="header_text">Войти</p>
        </a>`;
-    }
-
-    // 1.5) Добавление кнопки "Добавить таблетку"
-    const addBtnContainer = document.getElementById('add-pill-button-container');
-    if (addBtnContainer) {
-        const addBtn = document.createElement('button');
-        addBtn.textContent = 'Добавить таблетку';
-        addBtn.className = 'add-pill-button'; // для стилизации
-        addBtn.addEventListener('click', () => {
-            window.location.href = '/pages/pill_card.html'; // укажи нужную страницу
-        });
-        addBtnContainer.appendChild(addBtn);
     }
 
     // 2) Загрузка количества страниц и первой страницы
@@ -73,31 +60,57 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // 4) Функция отображения карточек таблеток
     function displayPills(pills) {
+        const container = document.getElementById('pill-container');
         container.innerHTML = '';
-        pills.forEach(pill => {
-            const imgSrc = placeholder;
 
+        pills.forEach(pill => {
             const card = document.createElement('div');
             card.className = 'pill-card';
+            card.dataset.id = pill.id;
+
             card.innerHTML = `
-            <div class="pill-image">
-                <img src="${imgSrc}" alt="Заглушка">
+           <div class="pill-image">
+                <img src="${pill.imageUrl}" alt="${pill.title}">
             </div>
-            <div class="pill-title">${pill.title}</div>
+            <div class="pill-name">${pill.title}</div>
         `;
 
-            card.addEventListener('click', () => {
-                // Сохраняем название в localStorage (опционально, если нужно для других целей)
-                localStorage.setItem('selectedPillTitle', pill.title);
+            const addButton = document.createElement('button');
+            addButton.textContent = 'Добавить в кабинет';
+            addButton.className = 'add-pill-button';
+            addButton.addEventListener('click', async () => {
+                const token = localStorage.getItem('token');
+                if (!token) {
+                    alert('Сначала войдите в профиль');
+                    return;
+                }
 
-                // Переходим на страницу карточки с параметром title в URL
-                window.location.href = `/pages/pill_card.html?title=${encodeURIComponent(pill.title)}`;
+                // try {
+                //     const response = await fetch(`http://192.168.0.107:8081/api/user/pills`, {
+                //         method: 'POST',
+                //         headers: {
+                //             'Content-Type': 'application/json',
+                //             'Authorization': `Bearer ${token}`
+                //         },
+                //         body: JSON.stringify({ pillId: pill.id })
+                //     });
+                //
+                //     if (!response.ok) {
+                //         throw new Error('Ошибка при добавлении таблетки');
+                //     }
+                //
+                //     alert(`Таблетка "${pill.title}" добавлена в ваш кабинет`);
+                // } catch (error) {
+                //     console.error(error);
+                //     alert('Не удалось добавить таблетку');
+                // }
             });
 
-
-            container.appendChild(card);
+            card.appendChild(addButton); // Добавляем кнопку внутрь карточки
+            container.appendChild(card); // Добавляем карточку в контейнер
         });
     }
+
 
 
     // 5) Пагинация
@@ -127,8 +140,6 @@ document.addEventListener("DOMContentLoaded", () => {
             if (currentPage < totalPages) loadPage(currentPage + 1);
         });
     }
-
-
 
     function updatePaginationButtons() {
         prevBtn.disabled = (currentPage === 1);

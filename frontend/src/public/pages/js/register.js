@@ -1,11 +1,11 @@
-import { register } from "@/public/pages/js/auth.js";
+import { register } from "./auth.js";
 
 const form = document.getElementById('registerForm');
 const result = document.getElementById('result');
 
 form.addEventListener('submit', async (event) => {
     event.preventDefault();
-
+    console.log('нажали на кнопочку');
     const formData = new FormData(form);
     const userData = {
         firstName: formData.get('firstName').trim(),
@@ -44,7 +44,7 @@ form.addEventListener('submit', async (event) => {
     }
 
     // Проверка пароля
-    const passwordPattern = /^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&\-+=()!*])(?=\S+$).{8,64}$/;
+    const passwordPattern = /^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&\-+=()!*_])(?=\S+$).{8,64}$/;
     if (!userData.password) {
         errors.push('Пароль обязателен.');
     } else if (!passwordPattern.test(userData.password)) {
@@ -59,8 +59,9 @@ form.addEventListener('submit', async (event) => {
 
     // ===== Отправка данных =====
     try {
+        console.log('✅ Регистрация прошла успешно. Перенаправляем...');
+        window.location.href = './login.html';
         await register(userData);
-        window.location.href = '/home.html';
     } catch (error) {
         console.error('Ошибка регистрации:', error);
         result.textContent = `❌ ${error.message}`;

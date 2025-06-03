@@ -1,18 +1,9 @@
-export const API_URL = 'https://98983ac6-5c2f-4621-ad61-ffefc1a506df.mock.pstmn.io'; // или адрес твоего бэка
-export async function request(url, options = {}) {
-    const fullUrl = `${API_URL}${url}`;
-
-    console.log(`➡️ Отправляем запрос на: ${fullUrl}`);  // Логирование перед отправкой
-
-    const response = await fetch(fullUrl, {
-        headers: {
-            'Content-Type': 'application/json',
-            ...(options.headers || {}),
-        },
-        ...options,
-    });
+export const API_URL = 'http://192.168.0.100:8080'; // или адрес твоего бэка
+export async function request(url, options) {
+    const response = await fetch(url, options);
     if (!response.ok) {
-        throw new Error(`Ошибка: ${response.status}`);
+        const errorText = await response.text();
+        throw new Error(errorText || 'Ошибка запроса');
     }
     return response.json();
 }

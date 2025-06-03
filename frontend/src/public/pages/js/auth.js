@@ -3,8 +3,6 @@ import { API_URL } from './http.js'
 
 export async function login(email, password) {
     try {
-        console.log('Отправка запроса на:', API_URL);
-
         const response = await fetch(`${API_URL}/auth/sessions/login`, {
             method: 'POST',
             mode: 'cors',
@@ -12,43 +10,38 @@ export async function login(email, password) {
                 'Content-Type': 'application/json',
                 'Accept': 'application/json'
             },
-            body: JSON.stringify({
-                email: email.trim(),
-                password: password.trim()
-            })
+            body: JSON.stringify({ email: email.trim(), password: password.trim() })
         });
 
-        console.log('Получен ответ:', response);
-
-        const responseText = await response.text();
-        console.log('Текст ответа:', responseText);
-
         if (!response.ok) {
+            const responseText = await response.text();
             throw new Error(`HTTP ${response.status}: ${responseText}`);
         }
 
-        const data = JSON.parse(responseText);
+        const data = await response.json();
         saveAuthData(data);
         return data;
 
     } catch (error) {
-        console.error('Полная ошибка:', error);
+        console.error('Ошибка логина:', error);
         throw new Error('Не удалось подключиться к серверу. Проверьте консоль.');
     }
 }
 
+
 export async function register(userData) {
     try {
-        const data = await request('/auth/register', {
+        const data = await request(`${API_URL}/auth/register`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(userData),
         });
 
-        saveAuthData(data);
+        // НЕ сохраняем данные при регистрации
+        // saveAuthData(data);  <-- удалить или закомментировать
+
         return data;
     } catch (error) {
-        // Обработка ошибок уже будет в функции request
         throw error;
     }
 }
@@ -56,8 +49,8 @@ export async function register(userData) {
 function saveAuthData(data) {
     const { id, userId, token, expirationTime } = data;
     localStorage.setItem('id', id);
-    localStorage.setItem('authToken', token);
     localStorage.setItem('userId', userId);
-    localStorage.setItem('tokenExpiration', expirationTime);
+    localStorage.setItem('token', token);
+    localStorage.setItem('expirationTime', expirationTime);
     console.log('Данные авторизации сохранены');
 }

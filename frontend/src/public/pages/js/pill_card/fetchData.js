@@ -1,7 +1,11 @@
+/*
 // fetchData.js
+// ототбражение описания и противопоказания таблетки
+import {API2_URL} from 'init.js';
+
 export async function fetchPillData(title) {
     const token = localStorage.getItem('token');
-    const url = `http://192.168.0.107:8081/api/pills/pill/${title}`; // Исправленный URL
+    const url = `${API2_URL}/api/pills/pill/${title}`; // Исправленный URL
 
     const response = await fetch(url, {
         headers: token ? { 'Authorization': `Bearer ${token}` } : {}
@@ -13,3 +17,4 @@ export async function fetchPillData(title) {
 
     return response.json();
 }
+*/

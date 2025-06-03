@@ -1,26 +1,12 @@
-// Проверка авторизации
+import { API_URL } from './http.js'
 
 const token = localStorage.getItem('token');
+console.log('Я хотя бы зашёл в profile.js');
+
 if (!token) {
     window.location.href = '/login.html';
 }
 
-async function loadProfile() {
-    try {
-        const response = await fetch('http://192.168.0.107:8080/auth/profile', {
-            method: 'GET',
-            headers: {
-                'Authorization': `Bearer ${token}`
-            }
-        });
-
-        // ... ваш существующий код ...
-    } catch (error) {
-        console.error('Ошибка:', error);
-    }
-}
-
-// Обработчик кнопки выхода
 function setupLogoutButton() {
     const logoutButton = document.getElementById('logoutButton');
 
@@ -30,12 +16,12 @@ function setupLogoutButton() {
     }
 
     logoutButton.addEventListener('click', async (e) => {
-        e.preventDefault(); // Добавьте это
+        e.preventDefault();
         console.log('Начало обработки выхода');
 
         try {
-            const response = await fetch('http://192.168.0.107:8080/auth/sessions/logout', { // Убедитесь в правильности URL
-                method: 'POST', // Обычно для выхода используется POST
+            const response = await fetch(`${API_URL}/auth/sessions/logout`, {
+                method: 'PATCH', // Или 'POST', если бек ожидает
                 headers: {
                     'Authorization': `Bearer ${token}`,
                     'Content-Type': 'application/json'
@@ -44,21 +30,26 @@ function setupLogoutButton() {
 
             console.log('Ответ сервера:', response.status);
 
+
             if (response.ok) {
-                localStorage.removeItem('token');
+
                 window.location.href = '/login.html';
             } else {
                 alert('Ошибка выхода: ' + response.status);
             }
         } catch (error) {
-            console.error('Ошибка:', error);
+            console.error('Ошибка при выходе:', error);
             alert('Сервер недоступен');
         }
     });
 }
 
-// Инициализация
 document.addEventListener('DOMContentLoaded', () => {
-    loadProfile();
-    setupLogoutButton();
+    if (!token) {
+        window.location.href = '/login.html';
+        return;
+    }
+    loadProfile(token);
+    setupLogoutButton(token);
 });
+

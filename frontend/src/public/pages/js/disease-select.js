@@ -1,3 +1,5 @@
+import {fetchUserFeatures} from "@/public/pages/js/user_feature.js";
+
 document.addEventListener('DOMContentLoaded', () => {
     const addBtn = document.getElementById('add-disease-btn');
     const diseaseList = document.createElement('div');
@@ -42,15 +44,14 @@ document.addEventListener('DOMContentLoaded', () => {
         diseaseList.appendChild(wrapper);
     }
 
-    // Обработчик клика по кнопке
+// использование на странице получения противопоказаний???????????? GET________
     addBtn.addEventListener('click', async () => {
         try {
-            const response = await fetch('/api/diseases'); // 🔁 Проверь этот эндпоинт!
-            const diseases = await response.json();
-            addBtn.style.display = 'none'; // скрываем кнопку
-            createDiseaseSelector(diseases);
+            const features = await fetchUserFeatures();
+            console.log('Особенности пользователя:', features);
+            // Можно отрисовать на странице
         } catch (error) {
-            console.error('Ошибка при получении данных:', error);
+            alert('Не удалось загрузить особенности');
         }
     });
 });

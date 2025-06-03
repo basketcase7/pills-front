@@ -8,22 +8,23 @@
 <body>
 <header class="header">
     <div class="first_p_header">
-        <a href="/index.html">
+        <a href="frontend/src/index.html">
             <img src="../public/assets/pictures/pill_header_img.png" alt="Логотип" class="logo">
         </a>
-        <a href="/index.html">
+        <a href="frontend/src/index.html">
             <div class="main-text">
                 <p>Сервис для проверки совместимости лекарственных препаратов<br>
                     и определения безопасных сочетаний лекарств</p>
             </div>
         </a>
     </div>
-    <div class="second_p_header">
-        <a href="/index.html">
-            <img src="/assets/pictures/logout_icon.png" class="ant_logo">
-            <p class="header_text">Выйти</p>
-        </a>
-    </div>
+    <button id="logoutButton" class="logout-btn">
+        <img src="/assets/pictures/logout_icon.png" class="ant_logo" alt="Logout">
+        <p class="header_text">Выйти</p>
+    </button>
+
+
+
 </header>
 
 <main class="container">
@@ -43,7 +44,7 @@
         </div>
     </div>
 </main>
-<script src="js/logout.js"></script>
-<script src="js/disease-select.js"></script>
+<script type="module" src="js/profile.js"></script>
+<script type="module" src="js/disease-select.js"></script>
 </body>
 </html>
