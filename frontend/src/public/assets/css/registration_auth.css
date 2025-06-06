@@ -1,141 +1,218 @@
 * {
-    margin: 0;
-    padding: 0;
-    font-family: 'Roboto', Tahoma, Geneva, Verdana, sans-serif;
+  margin: 0;
+  padding: 0;
+  font-family: "Roboto", Tahoma, Geneva, Verdana, sans-serif;
 }
 
 body {
-    margin: 0;
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    background-color: #eaf6fc;
-    font-family: sans-serif;
+  margin: 0;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background-color: #eaf6fc;
+  font-family: sans-serif;
 }
 
 .main-content {
-    flex: 1;
-    display: flex;
-    justify-content: center; /* по горизонтали */
-    align-items: center;     /* по вертикали */
+  flex: 1;
+  display: flex;
+  justify-content: center; /* по горизонтали */
+  align-items: center; /* по вертикали */
 }
 
 .form-container {
-    width: 100%;
-    max-width: 350px; /* чтобы всё было в рамках */
-    display: flex;
-    flex-direction: column;
-    gap: 25px;
-    align-items: center;
-    box-sizing: border-box;
+  width: 100%;
+  max-width: 350px; /* чтобы всё было в рамках */
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  align-items: center;
+  box-sizing: border-box;
 }
 
 .header {
-    display: flex;
-    justify-content: center; /* Центрирует всё содержимое */
-    background-color: #cde8f4;
-    padding: 20px;
+  display: flex;
+  justify-content: center; /* Центрирует всё содержимое */
+  background-color: #cde8f4;
+  padding: 20px;
 }
 
 .header-inner {
-    display: flex;
-    align-items: center;
-    gap: 10px; /* расстояние между картинкой и текстом */
+  display: flex;
+  align-items: center;
+  gap: 10px; /* расстояние между картинкой и текстом */
 }
 
-
 .logo {
-    width: 80px;
-    height: auto;
-    border-radius: 50%;
+  width: 80px;
+  height: auto;
+  border-radius: 50%;
 }
 
 .header-text {
-    font-size: 16px;
-    color: #111;
-    line-height: 1.4;
+  font-size: 16px;
+  color: #111;
+  line-height: 1.4;
 }
-
 
 h1 {
-    font-size: 18px;
-    font-weight: 100;
-    text-align: left;
-    display: inline-block;
-}
-
-.registration {
+  font-size: 18px;
+  font-weight: 100;
+  text-align: left;
+  display: inline-block;
 }
 
 .input-group {
-    width: 100%;
-    font-size: 16px;
-    background-color: #b2e4f2;
-    border: none;
-    border-radius: 6px;
-    height: 50px;
-    position: relative;
-    display: block;
+  width: 100%;
+  font-size: 16px;
+  background-color: #b2e4f2;
+  border: none;
+  border-radius: 6px;
+  height: 50px;
+  position: relative;
+  display: block;
+  margin: 10px;
 }
 
 .input-icon {
-    position: absolute;
-    top: 50%;
-    left: 8px;
-    transform: translateY(-50%);
-    width: 39px;
-    height: 39px;
+  position: absolute;
+  top: 50%;
+  left: 8px;
+  transform: translateY(-50%);
+  width: 39px;
+  height: 39px;
 }
 
 .input-group input {
-    padding: 12px 12px 12px 54px;
-    font-size: 16px;
-    background: none;
-    border: none;
-    outline:none;
-    width: 290px;
-
+  padding: 12px 12px 12px 54px;
+  font-size: 16px;
+  background: none;
+  border: none;
+  outline: none;
+  width: 290px;
 }
 
 .input-group label {
-    position: absolute;
-    left: 54px;
-    top: 50%;
-    transform: translateY(-50%);
-    color: #555;
-    pointer-events: none;
-    transition: 0.2s ease-out;
+  position: absolute;
+  left: 54px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #555;
+  pointer-events: none;
+  transition: 0.2s ease-out;
 }
 
 /* Скрываем текст label при вводе и фокусе */
 .input-group input:focus + label,
 .input-group input:not(:placeholder-shown) + label {
-    opacity: 0;
+  opacity: 0;
 }
 
 main {
-    display: flex;
-    justify-content: space-around;
-    flex-wrap: nowrap;
-    align-items: center;
-    flex-direction: column;
-    margin: 10% 10% 10% 10%;
-
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: nowrap;
+  align-items: center;
+  flex-direction: column;
+  margin: 10% 10% 10% 10%;
 }
 
-.or-link{
-    text-decoration: none;
-    color: inherit;
+.or-link {
+  text-decoration: none;
+  color: inherit;
+  margin-top: 10px;
 }
 
 button {
-    margin-top: 10px;
-    padding: 12px 40px 12px 40px;
-    background-color: #BEF3FF;
-    border: none;
-    border-radius: 6px;
-    font-size: 16px;
-    cursor: pointer;
-    color: #111;
-    transition: background-color 0.3s;
+  margin-top: 10px;
+  padding: 12px 40px 12px 40px;
+  background-color: #bef3ff;
+  border: none;
+  border-radius: 6px;
+  font-size: 16px;
+  cursor: pointer;
+  color: #111;
+  transition: background-color 0.3s;
+}
+
+.button-container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin-top: 10px;
+}
+
+/*норм*/
+.header {
+  display: flex;
+  justify-content: center; /* Центрирует всё содержимое */
+  background-color: #aae1ee;
+}
+/*убрала*/
+.header-inner {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.first_p_header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 20px;
+}
+.second_p_header {
+  display: flex;
+  align-items: flex-end;
+  padding-left: 30px;
+  flex-wrap: nowrap;
+}
+
+.header_logo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.header_logo a {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.header_text {
+  font-weight: 300;
+  font-size: 10px;
+  text-align: center;
+  text-decoration: underline;
+  padding-bottom: 15px;
+}
+/*????????????????????????*/
+.main-text {
+  font-size: 20px;
+  font-weight: 300;
+}
+
+a {
+  text-decoration: none;
+}
+
+a,
+a:visited,
+a:hover,
+a:active {
+  color: inherit;
+}
+
+.logo {
+  width: 80px;
+  height: auto;
+  border-radius: 50%;
+}
+
+.ant_logo {
+  width: 58px;
+  height: auto;
+  border-radius: 50%;
+  align-items: center;
 }

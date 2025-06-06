@@ -1,0 +1,349 @@
+public class PillsController { private final PillsService pillsService;
+@GetMapping(@»"/{page}")
+new * public List<PillOto> getPillsPage(@PathVariable int page)
+{ return pillsService.getPillsPage(page);
+@GetMapping(@×"/pageCount")
+ new* public Integer getPageCount() { return pillsService.getPageCount();
+
+http://localhost:5173/
+https://e9b8a0fb-b567-49df-b338-d091abf8c580.mock.pstmn.io
+openapi: 3.0.3
+info:
+  title: Auth Service API
+  version: 1.0.0
+  description: API for user authentication and session management
+
+paths:
+  /auth/sessions/login:
+    post:
+      tags:
+        - Sessions
+      summary: Create new session
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LoginByEmailBody'
+      responses:
+        '200':
+          description: Session created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SessionResponse'
+        '401':
+          description: Unauthorized (invalid credentials)
+
+  /auth/sessions/isactive/{active}:
+    get:
+      tags:
+        - Sessions
+      summary: Get sessions by active status
+      parameters:
+        - name: active
+          in: path
+          required: true
+          schema:
+            type: boolean
+      security:
+        - BearerAuth: []
+      responses:
+        '200':
+          description: List of sessions
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/CurrentSessionResponse'
+        '401':
+          description: Unauthorized
+
+  /auth/sessions/logout:
+    patch:
+      tags:
+        - Sessions
+      summary: Logout current session
+      security:
+        - BearerAuth: []
+      responses:
+        '200':
+          description: Session terminated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SessionResponse'
+        '401':
+          description: Unauthorized
+
+  /auth/register:
+    post:
+      tags:
+        - Users
+      summary: Register new user
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RegisterBody'
+      responses:
+        '200':
+          description: User registered
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TokenResponse'
+        '400':
+          description: Validation error
+
+  /auth/profile:
+    get:
+      tags:
+        - Users
+      summary: Get current user profile
+      security:
+        - BearerAuth: []
+      responses:
+        '200':
+          description: User profile
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserResponse'
+        '401':
+          description: Unauthorized
+
+  /auth/user/{email}:
+    get:
+      tags:
+        - Users
+      summary: Get user by email
+      parameters:
+        - name: email
+          in: path
+          required: true
+          schema:
+            type: string
+            format: email
+      responses:
+        '200':
+          description: User data
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserResponse'
+        '404':
+          description: User not found
+
+  /auth/user/{id}:
+    get:
+      tags:
+        - Users
+      summary: Get user by ID
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '200':
+          description: User data
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserResponse'
+        '404':
+          description: User not found
+
+components:
+  schemas:
+    LoginByEmailBody:
+      type: object
+      required:
+        - email
+        - password
+      properties:
+        email:
+          type: string
+          format: email
+          example: user@example.com
+        password:
+          type: string
+          example: P@ssw0rd!
+
+
+    SessionResponse:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          example: "550e8400-e29b-41d4-a716-446655440000"
+        userId:
+          type: string
+          format: uuid
+          example: "550e8400-e29b-41d4-a716-446655440000"
+        token:
+          type: string
+          example: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
+        expirationTime:
+          type: string
+          format: date-time
+          example: "2024-01-01T12:00:00Z"
+
+    CurrentSessionResponse:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        userId:
+          type: string
+          format: uuid
+        expirationTime:
+          type: string
+          format: date-time
+        active:
+          type: boolean
+
+    RegisterBody:
+      type: object
+      required:
+        - firstName
+        - lastName
+        - email
+        - password
+      properties:
+        firstName:
+          type: string
+          minLength: 1
+          maxLength: 50
+          pattern: ^[А-ЯЁ][а-яё]{1,50}$
+          example: Иван
+        lastName:
+          type: string
+          minLength: 1
+          maxLength: 50
+          pattern: ^[А-ЯЁ][а-яё]{1,50}$
+          example: Иванов
+        email:
+          type: string
+          format: email
+          example: user@example.com
+        password:
+          type: string
+          minLength: 8
+          maxLength: 64
+          pattern: ^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&-+=()!*])(?=\S+$).{8,64}$
+          example: P@ssw0rd!
+
+    TokenResponse:
+      type: object
+      properties:
+        token:
+          type: string
+          example: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
+
+    UserResponse:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          example: "550e8400-e29b-41d4-a716-446655440000"
+        firstName:
+          type: string
+          example: Иван
+        lastName:
+          type: string
+          example: Иванов
+        email:
+          type: string
+          format: email
+          example: user@example.com
+
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+0
+export async function login(email, password) {
+    try {
+        console.log('Отправка запроса на:', API_URL);
+
+        const response = await fetch(${API_URL}/auth/sessions/login, {
+            method: 'POST',
+            mode: 'cors',
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json'
+            },
+            body: JSON.stringify({
+                email: email.trim(),
+                password: password.trim()
+            })
+        });
+
+        console.log('Получен ответ:', response);
+
+        const responseText = await response.text();
+        console.log('Текст ответа:', responseText);
+
+        if (!response.ok) {
+            throw new Error(HTTP ${response.status}: ${responseText});
+        }
+
+        const data = JSON.parse(responseText);
+        saveAuthData(data);
+        return data;
+
+    } catch (error) {
+        console.error('Полная ошибка:', error);
+        throw new Error('Не удалось подключиться к серверу. Проверьте консоль.');
+    }
+}
+
+PILL COUNTER
+document.addEventListener("DOMContentLoaded", () => {
+    try {
+        const container = document.querySelector('.user-list-container');
+        if (!container) {
+            console.error('Контейнер user-list-container не найден');
+            return;
+        }
+
+        // Получаем счетчики из localStorage
+        const counters = JSON.parse(localStorage.getItem('pillCounters')) || [];
+
+
+        // Пример запроса к бэкенду
+        /*
+        const response = await fetch('/api/userPills');
+        const data = await response.json();
+        */
+
+        // Отображаем только препараты с ненулевым счетчиком
+        data.forEach((pill, index) => {
+            if (counters[index] > 0) {
+                const pillItem = document.createElement('div');
+                pillItem.className = 'pill-item';
+                pillItem.innerHTML = `
+                    <div class="pill-image">
+                        <img src="${pill.imageUrl}" alt="${pill.name}" />
+                    </div>
+                    <div class="pill-name">${pill.name}</div>
+                    <div class="click-count">Добавлено: ${counters[index]} раз</div>
+                `;
+                container.appendChild(pillItem);
+            }
+        });
+
+    } catch (error) {
+        console.error('Ошибка отображения списка:', error);
+    }
+});

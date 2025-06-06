@@ -1,50 +1,62 @@
 <!DOCTYPE html>
 <html lang="ru">
-<head>
-    <meta charset="UTF-8">
+  <head>
+    <meta charset="UTF-8" />
     <title>Профиль пользователя</title>
-    <link rel="stylesheet" href="/assets/css/profile.css">
-</head>
-<body>
-<header class="header">
-    <div class="first_p_header">
-        <a href="frontend/src/index.html">
-            <img src="../public/assets/pictures/pill_header_img.png" alt="Логотип" class="logo">
+    <link rel="stylesheet" href="/assets/css/profile.css" />
+  </head>
+  <body>
+    <header class="header">
+      <div class="first_p_header">
+        <a href="/index.html">
+          <img
+            src="../public/assets/pictures/pill_header_img.png"
+            alt="Логотип"
+            class="logo"
+          />
         </a>
-        <a href="frontend/src/index.html">
-            <div class="main-text">
-                <p>Сервис для проверки совместимости лекарственных препаратов<br>
-                    и определения безопасных сочетаний лекарств</p>
-            </div>
+        <a href="/index.html">
+          <div class="main-text">
+            <p>
+              Сервис для проверки совместимости лекарственных препаратов<br />
+              и определения безопасных сочетаний лекарств
+            </p>
+          </div>
         </a>
-    </div>
-    <button id="logoutButton" class="logout-btn">
-        <img src="/assets/pictures/logout_icon.png" class="ant_logo" alt="Logout">
+      </div>
+      <button id="logoutButton" class="logout-btn">
+        <img
+          src="/assets/pictures/logout_icon.png"
+          class="ant_logo"
+          alt="Logout"
+        />
         <p class="header_text">Выйти</p>
-    </button>
+      </button>
+    </header>
 
-
-
-</header>
-
-<main class="container">
-    <div class="user-card">
+    <main class="container">
+      <div class="user-card">
         <div class="name">Карточка пользователя:</div>
-        <input type="text" placeholder="Введите Ваши фамилию и имя">
-        <div class="name">Возраст:</div>
-        <input type="text" placeholder="Введите Ваш возраст">
-        <div class="name">Противопоказания/болезни:</div>
-        <button id="add-disease-btn">Добавить +</button>
-    </div>
-
-    <div class="my-meds">
-        <div class="name">Мои лекарства:</div>
-        <div class="med-buttons">
-            <button>Добавить +</button>
+        <p id="fullname"></p>
+        <div id="disease-section">
+          <div class="name">Противопоказания/болезни:</div>
+          <!-- сюда выводятся уже добавленные болезни -->
+          <div id="disease-list"></div>
+          <!-- сюда вставится <select> и кнопка «Сохранить» -->
+          <div id="disease-form"></div>
+          <!-- исходная кнопка «Добавить +» -->
+          <button id="add-disease-btn">Добавить +</button>
         </div>
-    </div>
-</main>
-<script type="module" src="js/profile.js"></script>
-<script type="module" src="js/disease-select.js"></script>
-</body>
+      </div>
+
+      <div class="my-meds">
+        <div class="name">Мои лекарства:</div>
+        <div class="med-buttons" id="medButtonsContainer">
+          <!-- Сюда будет динамически вставлено содержимое -->
+        </div>
+      </div>
+    </main>
+    <script type="module" src="js/profile.js"></script>
+    <script type="module" src="js/disease-select.js"></script>
+  </body>
 </html>

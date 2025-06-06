@@ -1,187 +1,199 @@
 * {
-    margin: 0;
-    padding: 0;
-    font-family: 'Roboto', Tahoma, Geneva, Verdana, sans-serif;
+  margin: 0;
+  padding: 0;
+  font-family: "Roboto", Tahoma, Geneva, Verdana, sans-serif;
 }
 
 body {
-    margin: 0;
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    background-color: #F4FDFF;
-    font-family: sans-serif;
+  margin: 0;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background-color: #f4fdff;
+  font-family: sans-serif;
 }
 /*норм*/
 .header {
-    display: flex;
-    justify-content: center; /* Центрирует всё содержимое */
-    background-color: #AAE1EE;
-
+  display: flex;
+  justify-content: center; /* Центрирует всё содержимое */
+  background-color: #aae1ee;
 }
 .ant_logo {
-height: 50px;
-    align-items: center;
+  height: 50px;
+  align-items: center;
 }
 
 /*убрала*/
 .header-inner {
-    display: flex;
-    align-items: center;
-    gap: 10px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
 }
 
 .first_p_header {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    padding: 20px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 20px;
 }
 .second_p_header {
-    display: flex;
-    align-items: flex-end;
-    padding-left: 30px;
-    flex-wrap: nowrap;
+  display: flex;
+  align-items: flex-end;
+  padding-left: 30px;
+  flex-wrap: nowrap;
 }
 
 .header_logo {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .header_logo a {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .header_text {
-    font-weight: 300;
-    font-size: 10px;
-    text-align: center;
-    text-decoration: underline;
-    padding-bottom: 15px;
+  font-weight: 300;
+  font-size: 10px;
+  text-align: center;
+  text-decoration: underline;
+  padding-bottom: 15px;
 }
 /*????????????????????????*/
 .main-text {
-    font-size: 20px;
-    font-weight: 300;
+  font-size: 20px;
+  font-weight: 300;
 }
 
 .container {
-    display: flex; /* Используем Flexbox */
-    justify-content: space-between; /* Распределяем столбцы с отступами */
-    padding-top: 30px;
-    height: 80vh;
+  display: flex; /* Используем Flexbox */
+  justify-content: space-between; /* Распределяем столбцы с отступами */
+  padding-top: 30px;
+  height: 80vh;
 }
 
 .name {
-    padding-bottom: 10px;
-    font-weight: 400;
-    font-size: 20px;
+  padding-bottom: 10px;
+  font-weight: 400;
+  font-size: 20px;
 }
 
 a {
-    text-decoration: none;
+  text-decoration: none;
 }
 
-a, a:visited, a:hover, a:active {
-    color: inherit;
+a,
+a:visited,
+a:hover,
+a:active {
+  color: inherit;
 }
-
 
 .logo {
-    width: 80px;
-    height: auto;
-    border-radius: 50%;
+  width: 80px;
+  height: auto;
+  border-radius: 50%;
 }
 
 .user-card {
-    background-color: #e4f9fd;
-    padding: 24px;
-    border-radius: 8px;
-    display: inline-block;
-    flex: 1; /* Каждый столбец занимает равную ширину */
-    margin: 0 15px 0 15%; /* Отступы между столбцами */
-
+  background-color: #e4f9fd;
+  padding: 24px;
+  border-radius: 8px;
+  display: inline-block;
+  flex: 1; /* Каждый столбец занимает равную ширину */
+  margin: 0 15px 0 15%; /* Отступы между столбцами */
 }
 .my-meds {
-    background-color: #e4f9fd;
-    padding: 24px;
-    border-radius: 8px;
-    display: inline-block;
-    flex: 1; /* Каждый столбец занимает равную ширину */
-    margin: 0 15% 0 15px; /* Отступы между столбцами */
-
+  background-color: #e4f9fd;
+  padding: 24px;
+  border-radius: 8px;
+  display: inline-block;
+  flex: 1; /* Каждый столбец занимает равную ширину */
+  margin: 0 15% 0 15px; /* Отступы между столбцами */
 }
 
-.user-card input, .user-card label {
-    display: block;
-    margin-bottom: 12px;
-    width: 100%;
+.user-card input,
+.user-card label {
+  display: block;
+  margin-bottom: 12px;
+  width: 100%;
 }
 
 .user-card input {
-    background-color: #b4e4f2;
-    border: none;
-    padding: 8px;
-    font-size: 16px;
-    border-radius: 4px;
+  background-color: #b4e4f2;
+  border: none;
+  padding: 8px;
+  font-size: 16px;
+  border-radius: 4px;
 }
 
 .my-meds .med-buttons {
-    display: flex;
-    gap: 12px;
-    margin-top: 16px;
+  display: flex;
+  gap: 12px;
+  margin-top: 16px;
 }
 
 .my-meds button {
-    background-color: #b4e4f2;
-    border: none;
-    padding: 10px 16px;
-    font-size: 16px;
-    border-radius: 4px;
-    cursor: pointer;
+  background-color: #b4e4f2;
+  border: none;
+  padding: 10px 16px;
+  font-size: 16px;
+  border-radius: 4px;
+  cursor: pointer;
 }
 
 .user-card button {
-    background-color: #b4e4f2;
-    border: none;
-    padding: 10px 16px;
-    font-size: 16px;
-    border-radius: 4px;
-    cursor: pointer;
+  background-color: #b4e4f2;
+  border: none;
+  padding: 10px 16px;
+  font-size: 16px;
+  border-radius: 4px;
+  cursor: pointer;
+  margin: 10px;
 }
 
 /* __________________________________________________________________________________ */
 .disease-field {
-    background-color: #bdefff;
-    padding: 8px 12px;
-    margin: 5px 0;
-    border-radius: 6px;
-    display: inline-block;
+  background-color: #bdefff;
+  padding: 8px 12px;
+  margin: 5px 0;
+  border-radius: 6px;
+  display: inline-block;
 }
 
 .add-disease-button {
-    background-color: #bdefff;
-    border: none;
-    padding: 8px 12px;
-    cursor: pointer;
-    border-radius: 6px;
-    margin-top: 5px;
+  background-color: #bdefff;
+  border: none;
+  padding: 8px 12px;
+  cursor: pointer;
+  border-radius: 6px;
+  margin-top: 5px;
 }
 
 .dropdown-wrapper {
-    margin-top: 5px;
+  margin-top: 5px;
 }
 
 .dropdown-wrapper input {
-    padding: 6px;
-    width: 100%;
-    margin-bottom: 5px;
+  padding: 6px;
+  width: 100%;
+  margin-bottom: 5px;
 }
 
 .dropdown-wrapper select {
-    width: 100%;
+  width: 100%;
+}
+
+.logout-btn {
+  all: unset; /* сбрасывает все стандартные стили кнопки */
+  cursor: pointer; /* чтобы было понятно, что кликабельно (можно убрать, если вообще не нужно палиться) */
+  font: inherit; /* сохраняет шрифт родителя */
+  color: inherit; /* чтобы не менялся цвет */
+  padding: 0;
+  margin: 0;
+  background: none;
+  border: none;
 }
